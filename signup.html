@@ -1,0 +1,215 @@
+signup
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up -Wanderquest</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('prags3.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .signup-container {
+            background: rgba(0, 0, 0, 0.75);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        .signup-container h1 {
+            font-family: 'Garamond', serif;
+            color: white;
+            text-shadow: 2px 2px 0 black;
+            margin-bottom: 20px;
+        }
+
+        .signup-container p {
+            color: white;
+            text-shadow: 1px 1px 0 black;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: black; /* Changed to black */
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: blue;
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: gray;
+        }
+
+        .signup-link {
+            margin-top: 15px;
+            font-size: 14px;
+            color: white;
+        }
+
+        .signup-link a {
+            color: #FFD700;
+            text-decoration: none;
+        }
+
+        .social-buttons {
+            margin-top: 15px;
+        }
+
+        .social-buttons button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: white;
+            color: black;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .social-buttons img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        <p>Create an account to access your learning resources</p>
+        <form name="signupForm" onsubmit="return validateForm(event)">
+            <input type="email" name="email" placeholder="Email" required>
+            
+            <div class="password-container">
+                <input type="password" name="password" id="password" placeholder="New Password" required>
+                <span class="toggle-password" onclick="togglePassword()">Show</span>
+            </div>
+            
+            <div class="password-container">
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Re-enter Password" required>
+                <span class="toggle-password" onclick="toggleConfirmPassword()">Show</span>
+            </div>
+            
+            <input type="date" id="birthday" name="birthday" min="1900-01-01" max="2025-03-03" required>
+            
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <div class="social-buttons">
+            <button onclick="window.location.href='https://accounts.google.com/signup'">
+                <img src="gi.jpeg" alt="Google Icon"> Sign up with Google
+            </button>
+            <button onclick="window.location.href='https://appleid.apple.com/account'">
+                <img src="ai.jpeg" alt="Apple Icon"> Sign up with Apple
+            </button>
+        </div>
+
+        <p class="signup-link">Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+    <script>
+        function togglePassword() {
+            let passwordField = document.getElementById("password");
+            let toggleText = document.querySelector('.password-container .toggle-password');
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleText.textContent = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleText.textContent = "Show";
+            }
+        }
+
+        function toggleConfirmPassword() {
+            let passwordField = document.getElementById("confirm_password");
+            let toggleText = document.querySelectorAll('.password-container .toggle-password')[1];
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleText.textContent = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleText.textContent = "Show";
+            }
+        }
+
+        function validateForm(event) {
+            event.preventDefault();
+            
+            let email = document.forms["signupForm"]["email"].value;
+            let password = document.forms["signupForm"]["password"].value;
+            let confirmPassword = document.forms["signupForm"]["confirm_password"].value;
+            let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+            if (!email.includes("@")) {
+                alert("Please enter a valid email address with '@'.");
+                return false;
+            }
+
+            if (!passwordRegex.test(password)) {
+                alert("Password must be at least 6 characters long and include:\n- At least one uppercase letter\n- At least one lowercase letter\n- At least one number\n- At least one special character (@$!%*?&)");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+
+            alert("Account successfully created!");
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
