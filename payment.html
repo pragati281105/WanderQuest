@@ -1,0 +1,440 @@
+payment
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | wanderQuest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #ff5722;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --text-light: #666;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .payment-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .booking-summary {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .summary-row.total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-bottom: none;
+        }
+        
+        .payment-methods {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .payment-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .payment-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .payment-tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .payment-form {
+            display: none;
+        }
+        
+        .payment-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 30px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+        
+        .card-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .card-row .form-group {
+            flex: 1;
+        }
+        
+        .pay-now-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        .pay-now-btn:hover {
+            background-color: #0055aa;
+        }
+        
+        .view-tickets-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .view-tickets-btn:hover {
+            background-color: #e64a19;
+        }
+        
+        .upi-apps {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .upi-app {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .upi-app:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .upi-app img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+        
+        .netbanking-banks {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .bank-option {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .bank-option:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .bank-option img {
+            height: 30px;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+        
+        .bank-option span {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="payment-header">
+            <h1>Secure Payment</h1>
+            <p>Complete your booking with a secure payment</p>
+        </div>
+        
+        <div class="booking-summary">
+            <h2 class="section-title">Booking Summary</h2>
+            <div class="summary-row">
+                <span>Flight:</span>
+                <span>IndiGo 6E 213 (Delhi to Mumbai)</span>
+            </div>
+            <div class="summary-row">
+                <span>Passenger:</span>
+                <span>1 Adult (Economy)</span>
+            </div>
+            <div class="summary-row">
+                <span>Seat:</span>
+                <span>5A (Window)</span>
+            </div>
+            <div class="summary-row">
+                <span>Meal:</span>
+                <span>Vegetarian Meal</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total Amount:</span>
+                <span>₹7,307</span>
+            </div>
+        </div>
+        
+        <div class="payment-methods">
+            <h2 class="section-title">Payment Method</h2>
+            
+            <div class="payment-tabs">
+                <div class="payment-tab active" data-tab="credit-card">Credit/Debit Card</div>
+                <div class="payment-tab" data-tab="upi">UPI</div>
+                <div class="payment-tab" data-tab="netbanking">Net Banking</div>
+            </div>
+            
+            <!-- Credit Card Form -->
+            <div class="payment-form active" id="credit-card-form">
+                <div class="card-icons">
+                    <div class="card-icon"><i class="fab fa-cc-visa"></i></div>
+                    <div class="card-icon"><i class="fab fa-cc-mastercard"></i></div>
+                    <div class="card-icon"><i class="fab fa-cc-amex"></i></div>
+                    <div class="card-icon"><i class="fab fa-cc-discover"></i></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-name">Name on Card</label>
+                    <input type="text" id="card-name" placeholder="John Doe">
+                </div>
+                
+                <div class="card-row">
+                    <div class="form-group">
+                        <label for="expiry-date">Expiry Date</label>
+                        <input type="text" id="expiry-date" placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- UPI Form -->
+            <div class="payment-form" id="upi-form">
+                <div class="form-group">
+                    <label for="upi-id">UPI ID</label>
+                    <input type="text" id="upi-id" placeholder="yourname@upi">
+                </div>
+                
+                <p style="text-align: center; color: var(--text-light);">OR</p>
+                
+                <p style="text-align: center; margin-bottom: 15px;">Pay using any UPI app</p>
+                
+                <div class="upi-apps">
+                    <div class="upi-app">
+                        <img src="https://via.placeholder.com/40?text=GPay" alt="Google Pay">
+                    </div>
+                    <div class="upi-app">
+                        <img src="https://via.placeholder.com/40?text=PhonePe" alt="PhonePe">
+                    </div>
+                    <div class="upi-app">
+                        <img src="https://via.placeholder.com/40?text=Paytm" alt="Paytm">
+                    </div>
+                    <div class="upi-app">
+                        <img src="https://via.placeholder.com/40?text=BHIM" alt="BHIM">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Net Banking Form -->
+            <div class="payment-form" id="netbanking-form">
+                <p style="text-align: center; margin-bottom: 15px;">Select your bank</p>
+                
+                <div class="netbanking-banks">
+                    <div class="bank-option">
+                        <img src="https://via.placeholder.com/80x30?text=SBI" alt="SBI">
+                        <span>State Bank of India</span>
+                    </div>
+                    <div class="bank-option">
+                        <img src="https://via.placeholder.com/80x30?text=HDFC" alt="HDFC">
+                        <span>HDFC Bank</span>
+                    </div>
+                    <div class="bank-option">
+                        <img src="https://via.placeholder.com/80x30?text=ICICI" alt="ICICI">
+                        <span>ICICI Bank</span>
+                    </div>
+                    <div class="bank-option">
+                        <img src="https://via.placeholder.com/80x30?text=Axis" alt="Axis">
+                        <span>Axis Bank</span>
+                    </div>
+                    <div class="bank-option">
+                        <img src="https://via.placeholder.com/80x30?text=PNB" alt="PNB">
+                        <span>Punjab National Bank</span>
+                    </div>
+                    <div class="bank-option">
+                        <img src="https://via.placeholder.com/80x30?text=Other" alt="Other">
+                        <span>Other Bank</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="pay-now-btn" id="complete-payment">Complete Payment</button>
+            <a href="confirmation.html" class="view-tickets-btn">View Booked Tickets</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Payment method tabs
+            const tabs = document.querySelectorAll('.payment-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all forms
+                    document.querySelectorAll('.payment-form').forEach(form => {
+                        form.classList.remove('active');
+                    });
+                    
+                    // Show corresponding form
+                    const tabId = this.dataset.tab;
+                    document.getElementById(`${tabId}-form`).classList.add('active');
+                });
+            });
+            
+            // Complete payment button
+            document.getElementById('complete-payment').addEventListener('click', function() {
+                // In a real app, you would process payment here
+                alert('Payment successful! Redirecting to booking confirmation...');
+                
+                // Redirect to confirmation page after 1 second
+                setTimeout(() => {
+                    window.location.href = 'confirmation.html';
+                }, 1000);
+            });
+            
+            // Format card number input
+            document.getElementById('card-number').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '');
+                if (value.length > 0) {
+                    value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+                }
+                e.target.value = value;
+            });
+            
+            // Format expiry date input
+            document.getElementById('expiry-date').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+        });
+    </script>
+</body>
+</html>
