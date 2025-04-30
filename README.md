@@ -1,2 +1,6 @@
 # WanderQuest
-Travel website - Html , css , javascript and react 
+ A simple Travel website using HTML, CSS, ,JavaScript and React 
+# Team Members 
+-Pragati - 
+-Isha Gandhi 
+-utkarsh garg 
