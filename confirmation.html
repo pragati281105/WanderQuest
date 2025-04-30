@@ -1,0 +1,463 @@
+confirmation
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation | wanderQuest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #ff5722;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --text-light: #666;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .confirmation-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .confirmation-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .confirmation-message {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+        
+        .booking-ticket {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .airline-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .airline-logo {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .airline-logo i {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .booking-ref {
+            text-align: right;
+        }
+        
+        .booking-ref span {
+            display: block;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .booking-ref strong {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+        
+        .flight-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        
+        .departure, .arrival {
+            flex: 1;
+        }
+        
+        .time {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .date {
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+        
+        .airport {
+            font-weight: bold;
+        }
+        
+        .city {
+            color: var(--text-light);
+        }
+        
+        .flight-duration {
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .duration {
+            margin-bottom: 5px;
+        }
+        
+        .flight-stops {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .divider {
+            position: relative;
+            height: 1px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+        
+        .divider::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #f5f5f5;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            left: -20px;
+            top: -10px;
+        }
+        
+        .divider::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #f5f5f5;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            right: -20px;
+            top: -10px;
+        }
+        
+        .passenger-details {
+            margin-bottom: 25px;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .detail-label {
+            width: 150px;
+            color: var(--text-light);
+        }
+        
+        .detail-value {
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .ticket-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .barcode {
+            font-family: 'Libre Barcode 128', cursive;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+        
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .home-btn {
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .home-btn:hover {
+            background-color: #0055aa;
+        }
+        
+        @media print {
+            .actions {
+                display: none;
+            }
+            
+            body {
+                background-color: white;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="confirmation-header">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1>Booking Confirmed!</h1>
+            <p>Your flight ticket has been successfully booked</p>
+        </div>
+        
+        <div class="confirmation-message">
+            <p>Thank you for choosing wanderQuest. Your booking details are below.</p>
+            <p>A confirmation email has been sent to <strong id="user-email">user@example.com</strong></p>
+        </div>
+        
+        <div class="booking-ticket">
+            <div class="ticket-header">
+                <div class="airline-info">
+                    <div class="airline-logo" id="airline-logo">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div>
+                        <div class="airline-name" id="airline-name">IndiGo</div>
+                        <div class="flight-number" id="flight-number">Flight 6E 213 • Economy</div>
+                    </div>
+                </div>
+                <div class="booking-ref">
+                    <span>Booking Reference</span>
+                    <strong id="booking-ref">WQ5X9T2R</strong>
+                </div>
+            </div>
+            
+            <div class="flight-details">
+                <div class="departure">
+                    <div class="time" id="departure-time">13:00</div>
+                    <div class="date" id="departure-date">15 June 2023</div>
+                    <div class="airport" id="departure-airport">DEL</div>
+                    <div class="city" id="departure-city">Delhi</div>
+                </div>
+                
+                <div class="flight-duration">
+                    <div class="duration" id="flight-duration">2h 0m</div>
+                    <div class="flight-stops">Non-stop</div>
+                </div>
+                
+                <div class="arrival">
+                    <div class="time" id="arrival-time">15:00</div>
+                    <div class="date" id="arrival-date">15 June 2023</div>
+                    <div class="airport" id="arrival-airport">BOM</div>
+                    <div class="city" id="arrival-city">Mumbai</div>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="passenger-details">
+                <div class="detail-row">
+                    <div class="detail-label">Passenger</div>
+                    <div class="detail-value" id="passenger-name">John Doe</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Seat</div>
+                    <div class="detail-value" id="seat-number">5A (Window)</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Meal</div>
+                    <div class="detail-value" id="meal-option">Vegetarian Meal</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Baggage</div>
+                    <div class="detail-value">15kg check-in • 7kg cabin</div>
+                </div>
+            </div>
+            
+            <div class="ticket-footer">
+                <div>
+                    <div class="detail-label">Boarding Time</div>
+                    <div class="detail-value">12:30 (Gate closes at 12:45)</div>
+                </div>
+                <div class="barcode" id="ticket-barcode">WQ5X9T2R</div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button class="home-btn" onclick="window.location.href='index.html'">
+                <i class="fas fa-home"></i> Back to Home
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get booking details from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Set airline details
+            const airline = urlParams.get('airline') || 'IndiGo';
+            const flightNumber = urlParams.get('flightNumber') || '6E 213';
+            const travelClass = urlParams.get('class') || 'Business';
+            document.getElementById('airline-name').textContent = airline;
+            document.getElementById('flight-number').textContent = `Flight ${flightNumber} • ${travelClass}`;
+            
+            // Set airline logo color based on airline
+            const airlineLogo = document.getElementById('airline-logo');
+            if (airline.toLowerCase().includes('indigo')) {
+                airlineLogo.style.backgroundColor = '#004080';
+            } else if (airline.toLowerCase().includes('air india')) {
+                airlineLogo.style.backgroundColor = '#FF0000';
+            } else if (airline.toLowerCase().includes('vistara')) {
+                airlineLogo.style.backgroundColor = '#800080';
+            } else {
+                airlineLogo.style.backgroundColor = '#0066cc'; // Default primary color
+            }
+            
+            // Set flight details
+            const departureTime = urlParams.get('departureTime') || '13:00';
+            const departureDate = urlParams.get('departureDate') || '2023-06-15';
+            const arrivalTime = urlParams.get('arrivalTime') || '15:00';
+            const fromCode = urlParams.get('fromCode') || 'DEL';
+            const fromCity = urlParams.get('fromCity') || 'Delhi';
+            const toCode = urlParams.get('toCode') || 'MAA';
+            const toCity = urlParams.get('toCity') || 'Chennai';
+            
+            document.getElementById('departure-time').textContent = formatTime(departureTime);
+            document.getElementById('departure-date').textContent = formatDate(departureDate);
+            document.getElementById('departure-airport').textContent = fromCode;
+            document.getElementById('departure-city').textContent = fromCity;
+            
+            document.getElementById('arrival-time').textContent = formatTime(arrivalTime);
+            document.getElementById('arrival-date').textContent = formatDate(departureDate); // Same date for demo
+            document.getElementById('arrival-airport').textContent = toCode;
+            document.getElementById('arrival-city').textContent = toCity;
+            
+            // Calculate and set duration
+            document.getElementById('flight-duration').textContent = calculateDuration(departureTime, arrivalTime);
+            
+            // Set passenger details
+            document.getElementById('passenger-name').textContent = urlParams.get('passenger') || 'John Doe';
+            document.getElementById('seat-number').textContent = urlParams.get('seat') || '5A (Window)';
+            document.getElementById('meal-option').textContent = urlParams.get('meal') || 'Vegetarian Meal';
+            
+            // Generate and set booking reference
+            const bookingRef = generateBookingRef();
+            document.getElementById('booking-ref').textContent = bookingRef;
+            document.getElementById('ticket-barcode').textContent = bookingRef;
+            
+            // Helper functions
+            function formatTime(timeStr) {
+                // Handle both HH:MM and HHMM formats
+                timeStr = timeStr.replace(/\D/g, '');
+                if (timeStr.length === 4) {
+                    return timeStr.slice(0,2) + ':' + timeStr.slice(2);
+                }
+                return timeStr;
+            }
+            
+            function formatDate(dateStr) {
+                if (!dateStr) return '15 June 2023';
+                try {
+                    const date = new Date(dateStr);
+                    if (isNaN(date.getTime())) return '15 June 2023';
+                    return date.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+                } catch (e) {
+                    return '15 June 2023';
+                }
+            }
+            
+            function calculateDuration(dep, arr) {
+                // Normalize time strings
+                dep = dep.replace(/\D/g, '');
+                arr = arr.replace(/\D/g, '');
+                
+                // Pad with zeros if necessary
+                dep = dep.padStart(4, '0');
+                arr = arr.padStart(4, '0');
+                
+                const depHours = parseInt(dep.slice(0,2));
+                const depMins = parseInt(dep.slice(2));
+                const arrHours = parseInt(arr.slice(0,2));
+                const arrMins = parseInt(arr.slice(2));
+                
+                let hours = arrHours - depHours;
+                let mins = arrMins - depMins;
+                
+                if (mins < 0) {
+                    hours--;
+                    mins += 60;
+                }
+                
+                // Handle overnight flights
+                if (hours < 0) {
+                    hours += 24;
+                }
+                
+                return `${hours}h ${mins.toString().padStart(2, '0')}m`;
+            }
+            
+            function generateBookingRef() {
+                const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+                let ref = '';
+                for (let i = 0; i < 8; i++) {
+                    ref += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return ref;
+            }
+        });
+    </script>
+</body>
+</html>
