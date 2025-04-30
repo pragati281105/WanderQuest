@@ -1,0 +1,446 @@
+index1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wanderQuest - Discover Your Next Adventure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #ff5722;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --text-light: #666;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .login-btn, .currency-btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+        }
+        
+        .login-btn {
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: rgba(0, 102, 204, 0.1);
+        }
+        
+        .currency-btn {
+            color: var(--text-color);
+            border: 1px solid #ddd;
+        }
+        
+        /* Hero Section with Your Custom Background Image */
+        .hero {
+            background: 
+                /* Dark overlay to improve text readability */
+                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                /* Your custom background image - CHANGE THIS PATH */
+                url('images/your-hero-image.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 150px 20px;
+            text-align: center;
+            position: relative;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Popular Destinations */
+        .popular-destinations {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--dark-color);
+        }
+        
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .destination-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 300px;
+        }
+        
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .destination-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+        
+        .destination-card p {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            z-index: 2;
+            margin: 0;
+        }
+        
+        /* Travel Options */
+        .transport-options {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .transport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .transport-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+        
+        .transport-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .transport-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(0, 102, 204, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+        
+        .transport-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .transport-card p {
+            color: var(--text-light);
+            margin: 0;
+        }
+        
+        /* Deals Banner */
+        .deals-banner {
+            background-color: #e3f2fd;
+            padding: 40px 0;
+        }
+        
+        .deals-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .deal-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .deal-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .deal-card h3 {
+            margin: 0 0 10px 0;
+            color: var(--dark-color);
+        }
+        
+        .deal-card p {
+            margin: 0;
+            color: var(--text-light);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .destination-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .transport-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                padding: 100px 20px;
+                min-height: 400px;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">wander<span>Quest</span></a>
+            <div class="user-actions">
+                <button class="login-btn" onclick="window.location.href='login.html'">Login/Sign Up</button>
+                <button class="currency-btn">INR <i class="fas fa-chevron-down"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" style="
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('image.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    padding: 150px 20px;
+    text-align: center;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+">
+    <div class="container">
+        <h2 style="font-size: 2.5rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Discover Your Next Adventure</h2>
+        <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+            Explore the world's most fascinating destinations with unbeatable travel experiences
+        </p>
+    </div>
+</section>
+
+    <section class="popular-destinations">
+        <div class="container">
+            <h2 class="section-title">Popular Destinations</h2>
+            <div class="destination-grid">
+                <a href="delhi.html" class="destination-card">
+                    <img src="delhi.png" alt="Delhi">
+                    <p>Delhi</p>
+                </a>
+                <a href="paris.html" class="destination-card">
+                    <img src="paris.png" alt="Paris">
+                    <p>Paris</p>
+                </a>
+                <a href="tokyo.html" class="destination-card">
+                    <img src="tokyo.png" alt="Tokyo">
+                    <p>Tokyo</p>
+                </a>
+                <a href="newyork.html" class="destination-card">
+                    <img src="newyork.png" alt="New York">
+                    <p>New York</p>
+                </a>
+                <a href="rome.html" class="destination-card">
+                    <img src="rome.png" alt="Rome">
+                    <p>Rome</p>
+                </a>
+                <a href="mumbai.html" class="destination-card">
+                    <img src="mumbai.png" alt="Mumbai">
+                    <p>Mumbai</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="transport-options">
+        <div class="container">
+            <h2 class="section-title">Travel Options</h2>
+            <div class="transport-grid">
+                <a href="flights.html" class="transport-card">
+                    <div class="transport-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Flights</h3>
+                    <p>Fast and convenient air travel to your dream destinations</p>
+                </a>
+                <a href="trains.html" class="transport-card">
+                    <div class="transport-icon">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <h3>Trains</h3>
+                    <p>Comfortable and scenic rail journeys across the country</p>
+                </a>
+                <a href="buses.html" class="transport-card">
+                    <div class="transport-icon">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <h3>Buses</h3>
+                    <p>Economical and flexible road trips to nearby locations</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="deals-banner">
+        <div class="container">
+            <div class="deals-container">
+                <div class="deal-card">
+                    <div class="deal-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3>Exclusive Deals</h3>
+                    <p>Save up to 40% on your next trip</p>
+                </div>
+                <div class="deal-card">
+                    <div class="deal-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Flexible Cancellation</h3>
+                    <p>Free cancellation on most bookings</p>
+                </div>
+                <div class="deal-card">
+                    <div class="deal-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>We're here to help anytime</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Set tomorrow's date as default for departure
+        document.addEventListener('DOMContentLoaded', function() {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const formattedDate = tomorrow.toISOString().split('T')[0];
+            if (document.getElementById('departure-date')) {
+                document.getElementById('departure-date').value = formattedDate;
+            }
+        });
+    </script>
+</body>
+</html>
