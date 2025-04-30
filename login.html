@@ -1,0 +1,176 @@
+login
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - WanderQuest</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('prags3.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            width: 100vw;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h1 {
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .login-container h1 span {
+            color: #1e90ff;
+        }
+
+        .login-container p {
+            color: white;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            outline: none;
+            transition: 0.3s ease;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #1e90ff;
+            color: #ffffff;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #1565c0;
+            transform: scale(1.05);
+        }
+
+        .signup-link {
+            margin-top: 20px;
+            font-size: 15px;
+            color: white;
+        }
+
+        .signup-link a {
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1><span>Wander</span>Quest</h1>
+        <p>Login to explore the best deals</p>
+        <form id="loginForm">
+            <input type="email" name="email" placeholder="Email" required>
+            <div class="input-container">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <span class="toggle-password" onclick="togglePassword()">👁️</span>
+            </div>
+            <p class="error-message" id="passwordError">Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.</p>
+            <button type="submit">Login</button>
+        </form>
+        <p class="signup-link">Don't have an account? <a href="signup.html">Sign up</a></p>
+    </div>
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById('password');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        }
+    
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            var password = document.getElementById('password').value;
+            var passwordError = document.getElementById('passwordError');
+            var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    
+            if (!passwordRegex.test(password)) {
+                passwordError.style.display = 'block';
+                event.preventDefault(); // Prevent form submission
+            } else {
+                passwordError.style.display = 'none';
+                event.preventDefault(); // Prevent default form submission
+                window.location.href = 'index.html'; // Redirect to index.html
+            }
+        });
+    </script>
+    
+</body>
+</html>
