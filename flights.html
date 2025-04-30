@@ -1,0 +1,178 @@
+flights
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking | TravelDream</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="flights.css">
+</head>
+<body>
+    <header class="flight-header">
+        <div class="container">
+            <h1 class="logo">wander<span>Quest</span></h1>
+            <nav class="flight-nav">
+                <a href="#" class="active">Flights</a>
+                <a href="trains.html">Trains</a>
+                <a href="buses.html">Buses</a>
+            </nav>
+            <div class="user-actions">
+                <button class="login-btn">Login/Sign Up</button>
+                <button class="currency-btn">INR <i class="fas fa-chevron-down"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flight-booking-container">
+        <div class="booking-tabs">
+            <div class="tab active" data-tab="one-way">One Way</div>
+            <div class="tab" data-tab="round-trip">Round Trip</div>
+        </div>
+
+        <div class="booking-form-container">
+            <form id="flight-search-form">
+                <div class="form-row">
+                    <div class="form-group from-group">
+                        <label>From</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-plane-departure"></i>
+                            <select id="from-city" required>
+                                <option value="">Select City</option>
+                                <option value="delhi">Delhi, DEL</option>
+                                <option value="jaipur">Jaipur, JAI</option>
+                                <option value="chennai">Chennai, MAA</option>
+                                <option value="kolkata">Kolkata, CCU</option>
+                                <option value="mumbai">Mumbai, BOM</option>
+                                <option value="paris">Paris, CDG</option>
+                                <option value="new york">New York, JFK</option>
+                                <option value="rome">Rome, FCO</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="swap-btn" type="button">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                    
+                    <div class="form-group to-group">
+                        <label>To</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-plane-arrival"></i>
+                            <select id="to-city" required>
+                                <option value="">Select City</option>
+                                <option value="delhi">Delhi, DEL</option>
+                                <option value="jaipur">Jaipur, JAI</option>
+                                <option value="chennai">Chennai, MAA</option>
+                                <option value="kolkata">Kolkata, CCU</option>
+                                <option value="mumbai">Mumbai, BOM</option>
+                                <option value="paris">Paris, CDG</option>
+                                <option value="new york">New York, JFK</option>
+                                <option value="rome">Rome, FCO</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group date-group">
+                        <label>Departure</label>
+                        <div class="date-input">
+                            <i class="far fa-calendar-alt"></i>
+                            <input type="date" id="departure-date" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group date-group return-group">
+                        <label>Return</label>
+                        <div class="date-input">
+                            <i class="far fa-calendar-alt"></i>
+                            <input type="date" id="return-date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group travellers-group">
+                        <label>Travellers & Class</label>
+                        <div class="travellers-input">
+                            <i class="fas fa-user-friends"></i>
+                            <select id="travellers-class">
+                                <option value="1-economy">1 Passenger, Economy</option>
+                                <option value="1-business">1 Passenger, Business</option>
+                                <option value="2-economy">2 Passengers, Economy</option>
+                                <option value="2-business">2 Passengers, Business</option>
+                                <option value="3-economy">3 Passengers, Economy</option>
+                                <option value="3-business">3 Passengers, Business</option>
+                                <option value="4-economy">4 Passengers, Economy</option>
+                                <option value="4-business">4 Passengers, Business</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i> Search Flights
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="deals-banner">
+            <div class="deal-card">
+                <div class="deal-icon">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+                <h3>Domestic Offers</h3>
+                <p>Starting from ₹2,499</p>
+            </div>
+            <div class="deal-card">
+                <div class="deal-icon">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <h3>International Deals</h3>
+                <p>Up to 30% off</p>
+            </div>
+            <div class="deal-card">
+                <div class="deal-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Quick Bookings</h3>
+                <p>Instant confirmation</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flight-results-container hidden">
+        <div class="container">
+            <div class="results-header">
+                <h2>Choose your preferred flight from <span id="from-city-result">Delhi</span> to <span id="to-city-result">Mumbai</span></h2>
+                <div class="date-selector">
+                    <!-- Dates will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="filters-container">
+                <div class="filter-option active">Non-stop</div>
+                <div class="filter-option">Low cost first</div>
+                <div class="filter-dropdown">
+                    <span>Economy</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <div class="flight-listings">
+                <!-- Flight cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div class="cookie-consent">
+        <p>We use cookies to provide a better experience. By continuing, you agree to our Cookie Policy.</p>
+        <button class="accept-cookies">Accept Cookies</button>
+    </div>
+
+    <script src="flights.js"></script>
+</body>
+</html>
